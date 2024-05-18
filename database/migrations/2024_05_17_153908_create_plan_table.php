@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('plan_title', 50);
             $table->longText('plan_explanation');
             $table->smallInteger('plan_status');
+            $table->integer('amount');
             $table->timestamps();
 
             // 外部キー制約
