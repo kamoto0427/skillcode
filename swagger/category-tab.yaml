@@ -1,0 +1,50 @@
+openapi: '3.0.2'
+info:
+  title: skillcode API設計書
+  version: '1.0'
+servers:
+  - url: http://localhost:8000
+    description: ローカル環境
+
+tags:
+  - name: "category"
+    description: "カテゴリー関連"
+
+paths:
+  /category/{category_id}:
+    get:
+      summary: ユーザーIDをもとにユーザー情報を返却する
+      tags: ["category"]
+      parameters:
+        - name: category_id
+          in: path
+          required: true
+          description: カテゴリーID
+          schema:
+            type: integer
+            format: int64
+            minimum: 1
+            example: 1
+      responses:
+        200:
+          description: 成功時のカテゴリー情報レスポンス
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  category_id:
+                    type: integer
+                    description: カテゴリーID
+                    format: int64
+                    minimum: 1
+                    example: 1
+                  category_name:
+                    type: string
+                    description: カテゴリー名
+                    maxLength: 10
+                    example: プログラミング
+        404:
+         description: カテゴリー情報が0件
+        default:
+          description: 想定外エラー

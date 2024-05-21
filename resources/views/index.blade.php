@@ -1,0 +1,1 @@
+<a href="{{ route('plan.get') }}">プラン一覧へ</a>
