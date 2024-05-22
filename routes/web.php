@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PlanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,5 +17,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/plan', [PlanController::class, 'get'])->name('plan.get');
+Route::get('/plan/create', [PlanController::class, 'createView'])->name('plan.create');
+Route::post('/plan/store', [PlanController::class, 'store'])->name('plan.store');
 
 require __DIR__.'/auth.php';
