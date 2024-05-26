@@ -152,4 +152,15 @@ class Plan extends Model
         ', $params);
         return $data;
     }
+
+    /**
+     * プランの削除(1件)
+     */
+    public function planDelete($params)
+    {
+        DB::table($this->table)
+            ->where('plan_id', $params['plan_id'])
+            ->where('user_id', $params['user_id'])
+            ->delete();
+    }
 }

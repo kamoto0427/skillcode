@@ -25,10 +25,14 @@
                                         <x-primary-button>{{ __('編集') }}</x-primary-button>
                                     </div>
                                   </a>
-                                  <div class="flex items-center flex-wrap">
-                                    <div class="flex items-center gap-4">
-                                      <x-primary-button>{{ __('削除') }}</x-primary-button>
-                                  </div>
+                                  <form method="POST" action="{{ route('plan.delete', ['plan_id' => $data->plan_id]) }}">
+                                    @csrf
+                                    @method('delete')
+                                    <div class="flex items-center flex-wrap">
+                                      <div class="flex items-center gap-4">
+                                        <x-primary-button>{{ __('削除') }}</x-primary-button>
+                                    </div>
+                                  </form>
                               </div>
                           </div>
                       </div>

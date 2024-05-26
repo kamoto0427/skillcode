@@ -87,9 +87,14 @@ class PlanController extends Controller
     /**
      * プランの削除
      */
-    public function delete()
+    public function delete($plan_id)
     {
         $user_id = Auth::user()->user_id;
+        $params = [
+            'plan_id' => $plan_id,
+            'user_id' => $user_id,
+        ];
+        $this->plan->planDelete($params);
         return Redirect::to('plan');
     }
 }
