@@ -6,13 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PlanRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,7 +15,11 @@ class PlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'tag_id' => 'required|numeric',
+            'plan_title' => 'required|string|max:50',
+            'plan_explanation' => 'required|string',
+            'plan_status' => 'required|numeric',
+            'amount' => 'required|numeric',
         ];
     }
 }

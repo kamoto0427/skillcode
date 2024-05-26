@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
+            {{ __('プロフィール編集') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("プロフィール情報とメールアドレスを更新できます。") }}
         </p>
     </header>
 
@@ -18,37 +18,77 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="user-name" :value="__('アカウント名')" />
+            <x-text-input id="user-name" name="user_name" type="text" class="mt-1 block w-full" :value="old('user_name', $user->user_name)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('user_name')" />
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            <x-input-label for="email" :value="__('メールアドレス')" />
+            <div>{{ $user->email }}</div>
+        </div>
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
+        <div>
+            <x-input-label for="self_introduction" :value="__('自己紹介文')" />
+            <x-text-input id="self_introduction" name="self_introduction" type="text" class="mt-1 block w-full" :value="old('self_introduction', $user->self_introduction)" autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('self_introduction')" />
+        </div>
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
+        <select class="form-select" id="user_status" name="user_status">
+            <option value="1">{{ '教える側' }}</option>
+            <option value="2">{{ '学ぶ側' }}</option>
+        </select>
 
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
-                </div>
-            @endif
+        <div>
+            <x-input-label for="career" :value="__('経歴・実績')" />
+            <x-text-input id="career" name="career" type="text" class="mt-1 block w-full" :value="old('career', $user->career)" autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('career')" />
+        </div>
+
+        <div>
+            <x-input-label for="portfolio_1" :value="__('ポートフォリオ①')" />
+            <x-text-input id="portfolio_1" name="portfolio_1" type="text" class="mt-1 block w-full" :value="old('portfolio_1', $user->portfolio_1)" autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('portfolio_1')" />
+        </div>
+
+        <div>
+            <x-input-label for="portfolio_1" :value="__('ポートフォリオ①')" />
+            <x-text-input id="portfolio_1" name="portfolio_1" type="text" class="mt-1 block w-full" :value="old('portfolio_1', $user->portfolio_1)" autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('portfolio_1')" />
+        </div>
+
+        <div>
+            <x-input-label for="portfolio_1_url" :value="__('ポートフォリオ①URL')" />
+            <x-text-input id="portfolio_1_url" name="portfolio_1_url" type="text" class="mt-1 block w-full" :value="old('portfolio_1_url', $user->portfolio_1_url)" autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('portfolio_1_url')" />
+        </div>
+
+        <div>
+            <x-input-label for="portfolio_2" :value="__('ポートフォリオ②')" />
+            <x-text-input id="portfolio_2" name="portfolio_2" type="text" class="mt-1 block w-full" :value="old('portfolio_2', $user->portfolio_2)" autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('portfolio_2')" />
+        </div>
+
+        <div>
+            <x-input-label for="portfolio_2_url" :value="__('ポートフォリオ②URL')" />
+            <x-text-input id="portfolio_2_url" name="portfolio_2_url" type="text" class="mt-1 block w-full" :value="old('portfolio_2_url', $user->portfolio_2_url)" autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('portfolio_2_url')" />
+        </div>
+
+        <div>
+            <x-input-label for="portfolio_3" :value="__('ポートフォリオ③')" />
+            <x-text-input id="portfolio_3" name="portfolio_3" type="text" class="mt-1 block w-full" :value="old('portfolio_3', $user->portfolio_3)" autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('portfolio_3')" />
+        </div>
+
+        <div>
+            <x-input-label for="portfolio_3_url" :value="__('ポートフォリオ③URL')" />
+            <x-text-input id="portfolio_3_url" name="portfolio_3_url" type="text" class="mt-1 block w-full" :value="old('portfolio_3_url', $user->portfolio_3_url)" autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('portfolio_3_url')" />
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('保存') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p
@@ -57,7 +97,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                >{{ __('保存しました。') }}</p>
             @endif
         </div>
     </form>

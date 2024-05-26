@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+use App\Http\Requests\PlanRequest;
 use App\Models\Plan;
 use App\Models\Tag;
 use App\Models\PlanEvaluation;
@@ -35,6 +36,22 @@ class PlanController extends Controller
     }
 
     /**
+     * プラン詳細
+     *
+     * @param $plan プラン情報
+     */
+    public function show($plan)
+    {
+        $plan = $this->plan->fetchAll();
+        foreach ($plan as $data) {
+            $data->amount = $this->plan_service->convertAmount($data->amount);
+            $data->plan_status = $this->plan_service->convertPlanStatus($data->plan_status);
+            $data->rating = $this->plan_service->convertPlanEvaluation($data->rating);
+        }
+        return view('plan', compact('plan'));
+    }
+
+    /**
      * プラン登録画面
      */
     public function createView()
@@ -46,7 +63,7 @@ class PlanController extends Controller
     /**
      * プラン登録
      */
-    public function store(Request $request) {
+    public function store(PlanRequest $request) {
         $user_id = Auth::user()->user_id;
         Plan::create([
             'user_id' => $user_id,
@@ -56,6 +73,7 @@ class PlanController extends Controller
             "plan_status" => $request->plan_status,
             "amount" => $request->amount,
         ]);
-        return Redirect::to('dashboard');
+        session()->flash('planCreateSuccess','プランの登録が完了しました。');
+        return Redirect::to('plan');
     }
 }

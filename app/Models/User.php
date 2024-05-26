@@ -20,6 +20,16 @@ class User extends Authenticatable
         'user_name',
         'email',
         'password',
+        'self_introduction',
+        'icon_image',
+        'user_status',
+        'career',
+        'portfolio_1',
+        'portfolio_1_url',
+        'portfolio_2',
+        'portfolio_2_url',
+        'portfolio_3',
+        'portfolio_3_url',
     ];
 
     /**
