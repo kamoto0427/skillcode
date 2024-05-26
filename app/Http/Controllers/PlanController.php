@@ -80,4 +80,13 @@ class PlanController extends Controller
         $plan = $this->plan->fetchByUserId($user_id);
         return view('planEditOrDelete', compact('plan'));
     }
+
+    /**
+     * プランの削除
+     */
+    public function delete()
+    {
+        $user_id = Auth::user()->user_id;
+        return Redirect::to('plan');
+    }
 }
