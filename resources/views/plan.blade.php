@@ -25,7 +25,7 @@
                                     <p class="leading-relaxed mb-3">{{ $data->user_name }}</p>
                                     <p class="leading-relaxed mb-3">評価：{{ $data->rating }}</p>
                                     <div class="flex items-center flex-wrap">
-                                    <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">詳しく見る
+                                    <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0" href={{ route('plan.show', $data->plan_id) }}>詳しく見る
                                         <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path d="M5 12h14"></path>
                                         <path d="M12 5l7 7-7 7"></path>

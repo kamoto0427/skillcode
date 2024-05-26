@@ -38,17 +38,11 @@ class PlanController extends Controller
     /**
      * プラン詳細
      *
-     * @param $plan プラン情報
      */
-    public function show($plan)
+    public function show(Plan $plan)
     {
-        $plan = $this->plan->fetchAll();
-        foreach ($plan as $data) {
-            $data->amount = $this->plan_service->convertAmount($data->amount);
-            $data->plan_status = $this->plan_service->convertPlanStatus($data->plan_status);
-            $data->rating = $this->plan_service->convertPlanEvaluation($data->rating);
-        }
-        return view('plan', compact('plan'));
+        $plan_show = $this->plan->fetch($plan);
+        return view('planShow', compact('plan_show'));
     }
 
     /**
@@ -75,5 +69,13 @@ class PlanController extends Controller
         ]);
         session()->flash('planCreateSuccess','プランの登録が完了しました。');
         return Redirect::to('plan');
+    }
+
+    /**
+     * プラン編集または削除画面
+     */
+    public function editOrDeleteView()
+    {
+        return view('planEditOrDelete');
     }
 }

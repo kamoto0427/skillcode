@@ -37,6 +37,9 @@
                         <x-responsive-nav-link :href="route('plan.create')">
                             {{ __('プラン登録') }}
                         </x-responsive-nav-link>
+                        <x-responsive-nav-link :href="route('plan.editOrDelete')">
+                            {{ __('プラン編集・削除') }}
+                        </x-responsive-nav-link>
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('プロフィール') }}
                         </x-dropdown-link>

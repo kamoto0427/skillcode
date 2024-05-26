@@ -19,7 +19,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/plan', [PlanController::class, 'get'])->name('plan.get');
+Route::get('/plan/editOrDelete', [PlanController::class, 'editOrDeleteView'])->name('plan.editOrDelete');
 Route::get('/plan/create', [PlanController::class, 'createView'])->name('plan.create');
 Route::post('/plan/store', [PlanController::class, 'store'])->name('plan.store');
+Route::get('/plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
 
 require __DIR__.'/auth.php';
