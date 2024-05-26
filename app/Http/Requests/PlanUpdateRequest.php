@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PlanRequest extends FormRequest
+class PlanUpdateRequest extends FormRequest
 {
 
     /**
@@ -15,6 +15,8 @@ class PlanRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'plan_id' => 'required|integer',
+            'user_id' => 'required|integer',
             'tag_id' => 'required|integer',
             'plan_title' => 'required|string|max:50',
             'plan_explanation' => 'required|string',

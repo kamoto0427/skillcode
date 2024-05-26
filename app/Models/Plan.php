@@ -154,6 +154,23 @@ class Plan extends Model
     }
 
     /**
+     * プランの更新
+     */
+    public function planUpdate($request)
+    {
+        DB::table($this->table)
+            ->where('plan_id', $request->plan_id)
+            ->where('user_id', $request->user_id)
+            ->update([
+                'plan_title' => $request->plan_title,
+                'plan_explanation' => $request->plan_explanation,
+                'tag_id' => $request->tag_id,
+                'plan_status' => $request->plan_status,
+                'amount' => $request->amount,
+            ]);
+    }
+
+    /**
      * プランの削除(1件)
      */
     public function planDelete($params)

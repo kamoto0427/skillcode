@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Http\Requests\PlanRequest;
+use App\Http\Requests\PlanUpdateRequest;
 use App\Models\Plan;
 use App\Models\Tag;
 use App\Models\PlanEvaluation;
@@ -82,6 +83,24 @@ class PlanController extends Controller
         $user_id = Auth::user()->user_id;
         $plan = $this->plan->fetchByUserId($user_id);
         return view('planEditOrDelete', compact('plan'));
+    }
+
+    /**
+     * プラン編集画面
+     */
+    public function editView(Plan $plan)
+    {
+        $tags = Tag::all();
+        return view('planEdit', compact('plan', 'tags'));
+    }
+
+    /**
+     * プラン更新
+     */
+    public function update(PlanUpdateRequest $request)
+    {
+        $this->plan->planUpdate($request);
+        return Redirect::to('plan');
     }
 
     /**

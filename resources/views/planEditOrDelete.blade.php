@@ -19,7 +19,7 @@
                                   <p class="leading-relaxed mb-3">{{ $data->plan_explanation }}</p>
                                   <p class="leading-relaxed mb-3">{{ $data->user_name }}</p>
                                   <p class="leading-relaxed mb-3">評価：{{ $data->rating }}</p>
-                                  <a href="">
+                                  <a href="{{ route('plan.edit', $data->plan_id) }}">
                                     <div class="flex items-center flex-wrap">
                                       <div class="flex items-center gap-4">
                                         <x-primary-button>{{ __('編集') }}</x-primary-button>

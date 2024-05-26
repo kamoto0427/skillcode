@@ -23,6 +23,8 @@ Route::get('/plan/editOrDelete', [PlanController::class, 'editOrDeleteView'])->n
 Route::get('/plan/create', [PlanController::class, 'createView'])->name('plan.create');
 Route::post('/plan/store', [PlanController::class, 'store'])->name('plan.store');
 Route::get('/plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
+Route::get('/plan/edit/{plan}', [PlanController::class, 'editView'])->name('plan.edit');
+Route::post('/plan/update', [PlanController::class, 'update'])->name('plan.update');
 Route::delete('/plan/delete/{plan_id}', [PlanController::class, 'delete'])->name('plan.delete');
 
 require __DIR__.'/auth.php';
