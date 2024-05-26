@@ -42,6 +42,9 @@ class PlanController extends Controller
     public function show(Plan $plan)
     {
         $plan_show = $this->plan->fetch($plan);
+        $plan_show->amount = $this->plan_service->convertAmount($plan_show->amount);
+        $plan_show->plan_status = $this->plan_service->convertPlanStatus($plan_show->plan_status);
+        $plan_show->rating = $this->plan_service->convertPlanEvaluation($plan_show->rating);
         return view('planShow', compact('plan_show'));
     }
 
