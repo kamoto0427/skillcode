@@ -113,12 +113,10 @@ class Plan extends Model
     /**
      * プラン取得(ユーザーIDをもとに該当するデータ全件取得)
      */
-    public function fetchByUserId($plan)
+    public function fetchByUserId($user_id)
     {
         $params = [
-            'plan_id' => $plan->plan_id,
-            'user_id' => $plan->user_id,
-            'tag_id' => $plan->tag_id,
+            'user_id' => $user_id,
         ];
 
         $data = DB::select(
@@ -151,7 +149,6 @@ class Plan extends Model
                 INNER JOIN tag ON tag.tag_id = plan.tag_id
                 WHERE
                     users.user_id = :user_id
-                    AND tag.tag_id = :tag_id
         ', $params);
         return $data;
     }

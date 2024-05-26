@@ -76,6 +76,8 @@ class PlanController extends Controller
      */
     public function editOrDeleteView()
     {
-        return view('planEditOrDelete');
+        $user_id = Auth::user()->user_id;
+        $plan = $this->plan->fetchByUserId($user_id);
+        return view('planEditOrDelete', compact('plan'));
     }
 }
