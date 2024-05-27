@@ -18,6 +18,7 @@
                               <p class="leading-relaxed mb-3">{{ $plan_show->plan_explanation }}</p>
                               <p class="leading-relaxed mb-3">{{ $plan_show->user_name }}</p>
                               <p class="leading-relaxed mb-3">評価：{{ $plan_show->rating }}</p>
+                              <p class="leading-relaxed mb-3">金額：¥{{ $plan_show->rating }}</p>
                               <div class="flex items-center flex-wrap">
                           </div>
                       </div>
