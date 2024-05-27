@@ -180,4 +180,44 @@ class Plan extends Model
             ->where('user_id', $params['user_id'])
             ->delete();
     }
+
+    /**
+     * プラン一覧データの取得
+     */
+    public function fetchPlanByTagId($params){
+        $data = DB::select(
+        '
+            SELECT
+                plan.plan_id,
+                plan.user_id,
+                plan.tag_id,
+                plan.plan_title,
+                plan.plan_explanation,
+                plan.plan_status,
+                plan.amount,
+                users.user_name,
+                users.icon_image,
+                tag.tag_name,
+                plan_e.rating
+            FROM
+                plan
+            INNER JOIN users ON plan.user_id = users.user_id
+            LEFT JOIN(
+                SELECT
+                    plan_id,
+                    AVG(rating) AS rating
+                FROM
+                    plan_evaluation
+                GROUP BY
+                    plan_id
+            ) AS plan_e
+            ON
+                plan_e.plan_id = plan.plan_id
+            INNER JOIN tag ON tag.tag_id = plan.tag_id
+            WHERE plan.tag_id = :tag_id
+            ORDER BY plan_e.rating DESC
+        ', $params);
+
+        return $data;
+    }
 }

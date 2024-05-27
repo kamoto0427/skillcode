@@ -28,12 +28,13 @@ class PlanController extends Controller
     public function get()
     {
         $plan = $this->plan->fetchAll();
+        $tags = Tag::all();
         foreach ($plan as $data) {
             $data->amount = $this->plan_service->convertAmount($data->amount);
             $data->plan_status = $this->plan_service->convertPlanStatus($data->plan_status);
             $data->rating = $this->plan_service->convertPlanEvaluation($data->rating);
         }
-        return view('plan', compact('plan'));
+        return view('plan', compact('plan', 'tags'));
     }
 
     /**
@@ -115,5 +116,26 @@ class PlanController extends Controller
         ];
         $this->plan->planDelete($params);
         return Redirect::to('plan');
+    }
+
+    /**
+     * タグで絞り込んだプラン一覧取得
+     *
+     * @param $tag_id タグID
+     */
+    public function getPlanByTag($tag_id)
+    {
+        $params = [
+            'tag_id' => $tag_id,
+        ];
+
+        $plan = $this->plan->fetchPlanByTagId($params);
+        $tags = Tag::all();
+        foreach ($plan as $data) {
+            $data->amount = $this->plan_service->convertAmount($data->amount);
+            $data->plan_status = $this->plan_service->convertPlanStatus($data->plan_status);
+            $data->rating = $this->plan_service->convertPlanEvaluation($data->rating);
+        }
+        return view('planTag', compact('plan', 'tags'));
     }
 }

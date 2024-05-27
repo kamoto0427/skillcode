@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,5 +27,7 @@ Route::get('/plan/{plan}', [PlanController::class, 'show'])->name('plan.show');
 Route::get('/plan/edit/{plan}', [PlanController::class, 'editView'])->name('plan.edit');
 Route::post('/plan/update', [PlanController::class, 'update'])->name('plan.update');
 Route::delete('/plan/delete/{plan_id}', [PlanController::class, 'delete'])->name('plan.delete');
+
+Route::get('plan/tag/{tag_id}', [PlanController::class, 'getPlanByTag'])->name('planTag.get');
 
 require __DIR__.'/auth.php';
