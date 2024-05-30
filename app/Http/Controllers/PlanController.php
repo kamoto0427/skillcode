@@ -67,10 +67,10 @@ class PlanController extends Controller
         Plan::create([
             'user_id' => $user_id,
             'tag_id' => $request->tag_id,
-            "plan_title" => $request->plan_title,
-            "plan_explanation" => $request->plan_explanation,
-            "plan_status" => $request->plan_status,
-            "amount" => $request->amount,
+            'plan_title' => $request->plan_title,
+            'plan_explanation' => $request->plan_explanation,
+            'plan_status' => $request->plan_status,
+            'amount' => $request->amount,
         ]);
         session()->flash('planCreateSuccess','プランの登録が完了しました。');
         return Redirect::to('plan');
