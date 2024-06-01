@@ -10,6 +10,17 @@ use App\Http\Requests\PlanUpdateRequest;
 
 class PlanUpdateRequestTest extends TestCase
 {
+
+    /**
+     * それぞれのテストが実行される前に行う処理
+     */
+    public function setUp(): void
+    {
+        parent::setUp();
+        $request = new PlanUpdateRequest();
+        $this->rules = $request->rules();
+    }
+
     /**
      * プラン登録バリデーションテスト
      * OK
@@ -17,7 +28,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_update_request_ok()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => true,
             'plan_id' => 1,
@@ -28,7 +38,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -39,7 +49,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_update_request_plan_id_null()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => null,
@@ -50,7 +59,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -61,7 +70,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_plan_id_not_integer()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 'あ',
@@ -72,7 +80,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -83,7 +91,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_update_request_user_id_null()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -94,7 +101,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -105,7 +112,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_user_id_not_integer()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -116,7 +122,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -127,7 +133,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_update_request_tag_id_null()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -138,7 +143,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -149,7 +154,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_tag_id_not_integer()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -160,7 +164,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -171,7 +175,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_plan_title_null()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -182,7 +185,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -193,7 +196,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_plan_title_not_string()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -204,7 +206,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -215,7 +217,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_plan_title_not_max_50()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -226,7 +227,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -237,7 +238,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_plan_explanation_null()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -248,7 +248,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -259,7 +259,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_plan_explanation_not_string()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -270,7 +269,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -281,7 +280,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_plan_status_null()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -292,7 +290,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => null,
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -303,7 +301,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_plan_status_not_integer()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -314,7 +311,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 'あ',
             'amount' => 100,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -325,7 +322,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_amount_null()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -336,7 +332,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => null,
             'amount' => null,
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 
@@ -347,7 +343,6 @@ class PlanUpdateRequestTest extends TestCase
      */
     public function test_plan_request_update_amount_not_integer()
     {
-        $rules = (new PlanUpdateRequest())->rules();
         $data = [
             'expected' => false,
             'plan_id' => 1,
@@ -358,7 +353,7 @@ class PlanUpdateRequestTest extends TestCase
             'plan_status' => 1,
             'amount' => 'あ',
         ];
-        $validator = validator($data, $rules);
+        $validator = validator($data, $this->rules);
         $this->assertEquals($data['expected'], $validator->passes());
     }
 }
