@@ -50,9 +50,6 @@ class PlanUpdateTest extends TestCase
         // actingAsでユーザーのログイン認証ができる※プラン編集ページはログイン認証が必要なページ
         $this->actingAs($this->user)->get('/plan/edit/' . $this->plan->plan_id);
 
-        // プランIDに紐づいたプランデータを取得
-        $plan = Plan::find($this->plan->plan_id);
-
         // プランを更新する内容のパラメータ
         $update_plan = [
             'plan_id' => $this->plan->plan_id,
@@ -69,9 +66,7 @@ class PlanUpdateTest extends TestCase
 
         // 302はリダイレクト成功を表す※プラン一覧ページにリダイレクト成功していることをテスト
         $response->assertStatus(302)->assertRedirect('/plan');
-        $plan = Plan::find($this->plan->plan_id);
-
-        // 編集したレコードがデータベースに存在するかテスト
+        // 編集したレコードがデータベースに存在するかテスト※第1引数: テーブル名, 第2引数: カラム値
         $this->assertDatabaseHas('plan', ['plan_title' => 'プラン更新']);
     }
 }
