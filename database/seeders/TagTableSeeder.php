@@ -18,21 +18,18 @@ class TagTableSeeder extends Seeder
         $insert = [
             [
                 'tag_id' => 1,
-                'category_id' => 1,
                 'tag_name' => 'PHP',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ],
             [
                 'tag_id' => 2,
-                'category_id' => 1,
                 'tag_name' => 'Laravel',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ],
             [
                 'tag_id' => 3,
-                'category_id' => 1,
                 'tag_name' => 'Python',
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),

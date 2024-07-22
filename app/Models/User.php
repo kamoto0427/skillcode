@@ -17,9 +17,19 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'user_name',
         'email',
         'password',
+        'self_introduction',
+        'icon_image',
+        'user_status',
+        'career',
+        'portfolio_1',
+        'portfolio_1_url',
+        'portfolio_2',
+        'portfolio_2_url',
+        'portfolio_3',
+        'portfolio_3_url',
     ];
 
     /**
@@ -31,6 +41,12 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    // テーブル
+    protected $table = 'users';
+
+    // 主キー
+    protected $primaryKey = 'user_id';
 
     /**
      * Get the attributes that should be cast.

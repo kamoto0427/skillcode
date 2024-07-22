@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('plan', function (Blueprint $table) {
-            $table->integer('plan_id')->primary();
-            $table->integer('user_id');
-            $table->integer('tag_id');
+            $table->bigIncrements('plan_id')->primary();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('tag_id');
             $table->string('plan_title', 50);
             $table->longText('plan_explanation');
             $table->smallInteger('plan_status');
