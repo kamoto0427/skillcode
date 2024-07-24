@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\Tag;
-use App\Models\PlanEvaluation;
 use App\Services\PlanServices;
 
 class TagController extends Controller
 {
-    public function __construct(PlanServices $plan_service)
+    private $plan;
+    public function __construct(private PlanServices $plan_service)
     {
         $this->plan = new Plan();
-        $this->tag = new Tag();
-        $this->plan_evaluation = new PlanEvaluation();
         $this->plan_service = $plan_service;
     }
 

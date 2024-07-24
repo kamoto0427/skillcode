@@ -4,21 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Http\Request;
 use App\Http\Requests\PlanRequest;
 use App\Http\Requests\PlanUpdateRequest;
 use App\Models\Plan;
 use App\Models\Tag;
-use App\Models\PlanEvaluation;
 use App\Services\PlanServices;
 
 class PlanController extends Controller
 {
-    public function __construct(PlanServices $plan_service)
+    private $plan;
+    public function __construct(private PlanServices $plan_service)
     {
         $this->plan = new Plan();
-        $this->tag = new Tag();
-        $this->plan_evaluation = new PlanEvaluation();
         $this->plan_service = $plan_service;
     }
 
