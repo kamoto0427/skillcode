@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class ErrorService
+class ResponseService
 {
   /**
    * エラーを投げる処理

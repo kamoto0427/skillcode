@@ -4,15 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Log;
 use App\Models\Blog;
-use App\Services\ErrorService;
+use App\Services\ResponseService;
 
 class BlogController extends Controller
 {
     private $blog;
-    public function __construct(private ErrorService $errorService)
+    public function __construct(private ResponseService $responseService)
     {
         $this->blog = new Blog();
-        $this->errorService = $errorService;
+        $this->responseService = $responseService;
     }
 
     /**
@@ -21,11 +21,19 @@ class BlogController extends Controller
     public function getPublishedData()
     {
         try {
-            $blogs = $this->blog->fetchPublished($this->errorService);
+            $blogs = $this->blog->fetchPublished($this->responseService);
         } catch (\Exception $e) {
             Log::error('データが取得できませんでした。');
             throw $e;
         }
         return response()->json(['blogs'=> $blogs]);
+    }
+
+    /**
+     * 登録処理
+     */
+    public function registerBlog()
+    {
+        \Log::debug('aaa');
     }
 }

@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Services\ErrorService;
 
 class Blog extends Model
 {
@@ -29,7 +28,7 @@ class Blog extends Model
     /**
      * 公開済み投稿一覧取得
      */
-    public function fetchPublished($errorService)
+    public function fetchPublished($responseService)
     {
         $data = DB::table($this->table)
                 ->select(
@@ -44,7 +43,7 @@ class Blog extends Model
                 ->get();
 
         if (count($data) === 0) {
-            return $errorService->abort(404, 'データが0件です。');
+            return $responseService->abort(404, 'データが0件です。');
         }
         return $data;
     }
