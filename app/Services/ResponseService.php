@@ -20,4 +20,18 @@ class ResponseService
         ]
     ], $status_code));
   }
+
+  /**
+   * 正常系レスポンス
+   *
+   * @param $status ステータスコード
+   * @param $message 成功メッセージ
+   */
+  public function status200($message)
+  {
+    return abort(response()->json([
+          'status' => 200,
+          'message' => $message
+    ], 200));
+  }
 }

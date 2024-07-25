@@ -47,4 +47,18 @@ class Blog extends Model
         }
         return $data;
     }
+
+    /**
+     * 登録処理
+     */
+    public function create($request)
+    {
+        Blog::create([
+            'title' => $request->title,
+            'explanation' => $request->explanation,
+            'published_date' => $request->explanation,
+            'published_flg' => $request->published_flg,
+            'delete_flg' => $request->delete_flg,
+        ]);
+    }
 }

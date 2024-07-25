@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Blog;
+use App\Http\Requests\RegisterBlogRequest;
 use App\Services\ResponseService;
 
 class BlogController extends Controller
@@ -32,8 +34,17 @@ class BlogController extends Controller
     /**
      * 登録処理
      */
-    public function registerBlog()
+    public function registerBlog(RegisterBlogRequest $request)
     {
-        \Log::debug('aaa');
+        DB::begintransaction();
+        try {
+            $this->blog->create($request);
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('投稿を登録する時にエラーが発生しました。');
+            throw $e;
+        }
+        return $this->responseService->status200('登録に成功しました。');
     }
 }
