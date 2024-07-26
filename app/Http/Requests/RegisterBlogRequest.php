@@ -6,7 +6,6 @@ use App\Http\Requests\BaseFormRequest;
 
 class RegisterBlogRequest extends BaseFormRequest
 {
-
     /**
      * Get the validation rules that apply to the request.
      *

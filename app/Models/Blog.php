@@ -53,12 +53,13 @@ class Blog extends Model
      */
     public function create($request)
     {
-        Blog::create([
-            'title' => $request->title,
-            'explanation' => $request->explanation,
-            'published_date' => $request->explanation,
-            'published_flg' => $request->published_flg,
-            'delete_flg' => $request->delete_flg,
+        DB::table($this->table)
+            ->insert([
+                'title' => $request['title'],
+                'explanation' => $request['explanation'],
+                'published_date' => $request['published_date'],
+                'published_flg' => $request['published_flg'],
+                'delete_flg' => $request['delete_flg'],
         ]);
     }
 }
